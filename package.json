@@ -9,6 +9,7 @@
   "author": "schmitz.chris@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "bufferutil": "3.0.0",
     "express": "^4.15.2",
     "socket.io": "^2.0.1"
   },
