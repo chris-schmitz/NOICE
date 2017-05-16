@@ -5,11 +5,6 @@ const io = require('socket.io')(http)
 
 PORT = process.env.PORT
 
-io.configure(function () {
-    io.set("transports", ["xhr-polling"])
-    io.set("polling duration", 10)
-})
-
 server.get('/', (request, response) => {
     response.json({test: 'worked'})
 })
