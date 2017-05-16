@@ -1,5 +1,5 @@
 const express = require('express')
-const http = require('http').Server(server)
+const http = require('http')
 const socketIO = require('socket.io')
 
 PORT = process.env.PORT || 3003
@@ -9,7 +9,7 @@ const server = app.listen(PORT, () => console.log(`Listening on port: ${PORT}`))
 const io = socketIO(server)
 
 
-server.get('/', (request, response) => {
+app.get('/', (request, response) => {
     response.json({test: 'worked'})
 })
 
