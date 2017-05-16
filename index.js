@@ -1,16 +1,19 @@
 const express = require('express')
-server = express()
 const http = require('http').Server(server)
-const io = require('socket.io')(http)
+const socketIO = require('socket.io')
 
-PORT = process.env.PORT
+PORT = process.env.PORT || 3003
+
+const app = express()
+const server = app.listen(PORT, () => console.log(`Listening on port: ${PORT}`))
+const io = socketIO(server)
+
 
 server.get('/', (request, response) => {
     response.json({test: 'worked'})
 })
 
 function hub(socket){
-    console.log('user connected')
     console.log('user connected')
 
     socket.on('login', (request, ...args) => {
@@ -19,6 +22,7 @@ function hub(socket){
         console.log(`args: ${args}`)
         socket.emit('response', "you're logged in", "welcome!")
     })
+    socket.on('disconnect', () => console.log('client disconnected'))
 }
 
 io.on('connection', hub)
