@@ -10,6 +10,7 @@ leds.E = new Gpio(24, 'out')
 
 const ON = 1
 const OFF = 0
+const delay = 100
 
 co(function *() {
 	yield turnOn(leds.N)
@@ -21,6 +22,25 @@ co(function *() {
 	yield allOff()
 	yield allOn()
 	yield allOff()
+	yield allOn()
+	yield allOff()
+	yield allOn()
+	yield allOff()
+	yield allOn()
+	yield allOff()
+	
+	yield turnOn(leds.N)
+	yield turnOn(leds.O)
+	yield turnOn(leds.I)
+	yield turnOn(leds.C)
+	yield turnOn(leds.E)
+
+	yield allOff()
+	yield allOn()
+	yield allOff()
+	yield allOn()
+	yield allOff()
+	yield allOn()
 	yield allOff()
 	yield allOn()
 	yield allOff()
@@ -28,7 +48,6 @@ co(function *() {
 .catch(error => console.error(error))
 
 function turnOn (led) {
-	let delay = 500
 	return new Promise((resolve, reject) => {
 		led.writeSync(ON)
 		setTimeout(resolve, delay)
@@ -38,13 +57,13 @@ function turnOn (led) {
 function allOn () {
 	return new Promise((resolve, reject) => {
 		Object.keys(leds).forEach(letter => leds[letter].writeSync(ON))
-		setTimeout(resolve, 500)
+		setTimeout(resolve, delay)
 	})
 }
 
 function allOff () {
 	return new Promise((resolve, reject) => {
 		Object.keys(leds).forEach(letter => leds[letter].writeSync(OFF))
-		setTimeout(resolve, 400)
+		setTimeout(resolve, delay)
 	})
 }
