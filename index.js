@@ -16,6 +16,7 @@ app.get('/', (request, response) => {
 app.post('/noice', (request, response) => {
     const payload = {type: 'noice'}
     io.emit('fire-action', payload)
+    response.json({message: 'worked'})
 })
 
 function hub(socket){
