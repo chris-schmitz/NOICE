@@ -1,10 +1,14 @@
 const express = require('express')
 const http = require('http')
 const socketIO = require('socket.io')
+const bodyParser = require('body-parser')
+
 
 PORT = process.env.PORT || 3003
 
 const app = express()
+app.use(bodyParser.json())
+
 const server = app.listen(PORT, () => console.log(`Listening on port: ${PORT}`))
 const io = socketIO(server)
 
@@ -14,9 +18,11 @@ app.get('/', (request, response) => {
 })
 
 app.post('/noice', (request, response) => {
-    const payload = {type: 'noice'}
-    io.emit('noice', payload)
-    response.json({message: 'worked'})
+    const challenge = request.body.challenge
+
+    io.emit('noice')
+
+    response.json({challenge, hi: 'hey!'})
 })
 
 function hub(socket){
