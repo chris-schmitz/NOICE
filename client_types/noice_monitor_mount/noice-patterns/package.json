@@ -1,0 +1,16 @@
+{
+  "name": "noice-patterns",
+  "version": "1.0.0",
+  "description": "This diagram shows how to wire the lights for the small NOICE sign.",
+  "main": "index.js",
+  "dependencies": {
+    "onoff": "^1.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
