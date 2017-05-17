@@ -3,37 +3,35 @@ const http = require('http')
 const socketIO = require('socket.io')
 const bodyParser = require('body-parser')
 
-
-PORT = process.env.PORT || 3003
-
+const PORT = process.env.PORT || 3003
 const app = express()
-app.use(bodyParser.json())
-
 const server = app.listen(PORT, () => console.log(`Listening on port: ${PORT}`))
 const io = socketIO(server)
 
+app.use(bodyParser.json())
+
 
 app.get('/', (request, response) => {
-    response.json({test: 'worked'})
+    response.json({test: 'API is up.'})
 })
 
 app.post('/noice', (request, response) => {
-    console.log(`received post from slack at: ${new Date}`)
+
     const challenge = request.body.challenge
+    const matchPatterns = /(noice|nice|chris|vscode|node|vue|javascript|raspberry)/i
 
     if (request.body.hasOwnProperty('event') && request.body.event.type === 'message') {
-        console.log(request.body.event.text)
-        const messageText = request.body.event.text
-        const matchPatterns = /(noice|nice|chris|vscode|node|vue|javascript|raspberry)/i
 
-        if(typeof messageText !== 'undefined' && messageText.match(matchPatterns)) {
+        const messageText = request.body.event.text
+
+        if (typeof messageText !== 'undefined' && messageText.match(matchPatterns)) {
             console.log('match found!')
             console.log(`Emitting socket.io event at: ${new Date}`)
+
             io.emit('noice')
         }
     }
 
-    console.log(`Responding to slack at: ${new Date}`)
     response.json({challenge, hi: 'hey!'})
 })
 
@@ -41,7 +39,7 @@ function hub(socket){
     console.log('user connected')
 
     socket.on('login', (request, ...args) => {
-        console.log('logged in')
+        console.log('new client logged in')
         socket.emit('response', "you're logged in", "welcome!")
     })
     socket.on('disconnect', () => console.log('client disconnected'))
