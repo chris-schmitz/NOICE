@@ -18,6 +18,7 @@ app.get('/', (request, response) => {
 })
 
 app.post('/noice', (request, response) => {
+    console.log(`received post from slack at: ${new Date}`)
     const challenge = request.body.challenge
 
     if (request.body.hasOwnProperty('event') && request.body.event.type === 'message') {
@@ -27,10 +28,12 @@ app.post('/noice', (request, response) => {
 
         if(typeof messageText !== 'undefined' && messageText.match(matchPatterns)) {
             console.log('match found!')
+            console.log(`Emitting socket.io event at: ${new Date}`)
             io.emit('noice')
         }
     }
 
+    console.log(`Responding to slack at: ${new Date}`)
     response.json({challenge, hi: 'hey!'})
 })
 
