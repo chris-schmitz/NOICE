@@ -21,6 +21,7 @@ app.post('/noice', (request, response) => {
     const challenge = request.body.challenge
 
     if (request.body.hasOwnProperty('event') && request.body.event.type === 'message') {
+        console.log(request.body.event)
         const messageText = request.body.event.text
         const matchPatterns = /(noice|nice|chris|vscode|node|vue|javascript|raspberry)/i
 
