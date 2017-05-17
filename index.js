@@ -25,7 +25,7 @@ app.post('/noice', (request, response) => {
         const messageText = request.body.event.text
         const matchPatterns = /(noice|nice|chris|vscode|node|vue|javascript|raspberry)/i
 
-        if(messageText.match(matchPatterns)) {
+        if(typeof messageText !== 'undefined' && messageText.match(matchPatterns)) {
             console.log('match found!')
             io.emit('noice')
         }
