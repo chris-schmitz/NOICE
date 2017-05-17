@@ -18,10 +18,17 @@ app.get('/', (request, response) => {
 })
 
 app.post('/noice', (request, response) => {
-    console.log(request.body)
     const challenge = request.body.challenge
 
-    io.emit('noice')
+    if (request.body.hasOwnProperty('event') && request.body.event.type === 'message') {
+        const messageText = request.body.event.text
+        const matchPatterns = /(noice|nice|chris|vscode|node|vue|javascript|raspberry)/i
+
+        if(messageText.match(matchPatterns)) {
+            console.log('match found!')
+            io.emit('noice')
+        }
+    }
 
     response.json({challenge, hi: 'hey!'})
 })
