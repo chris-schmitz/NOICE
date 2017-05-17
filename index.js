@@ -18,6 +18,7 @@ app.get('/', (request, response) => {
 })
 
 app.post('/noice', (request, response) => {
+    console.log(request.body)
     const challenge = request.body.challenge
 
     io.emit('noice')
