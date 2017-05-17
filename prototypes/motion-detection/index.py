@@ -1,5 +1,27 @@
 import RPi.GPIO as GPIO
 import time
+import subprocess
+
+GPIO.setmode(GPIO.BCM)
+PIR_PIN = 26
+GPIO.setup(PIR_PIN, GPIO.IN)
+
+try:
+    print "PIR Module Test (CTRL+C to exit)"
+    time.sleep(2)
+    print "Ready"
+    while True:
+        if GPIO.input(PIR_PIN):
+            print "Motion Detected!"
+            subprocess.check_call(['node', '../noice-patterns/index.js'])
+        time.sleep(1)
+except KeyboardInterrupt:
+    print " Quit"
+    GPIO.cleanup()
+
+'''
+import RPi.GPIO as GPIO
+import time
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -21,14 +43,15 @@ GPIO.setup(E, GPIO.OUT)
 try:
     while True:
         i = GPIO.input(PIR_IN)
-        if i == 0:
-            print 'on'
+        if GPIO.input(PIR_IN):
+            print 'zero'
             GPIO.output(N, GPIO.HIGH)
-        elif i == 1:
-            print 'off'
-            GPIO.output(N, GPIO.LOW)
         else:
-            print '?!'
+            print 'one'
+            GPIO.output(N, GPIO.LOW)
+
         time.sleep(.5)
-except keyboardInturupt:
+except KeyboardInterrupt:
         print 'cancelled'
+        GPIO.cleanup()
+'''
