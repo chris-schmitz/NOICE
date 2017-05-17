@@ -13,6 +13,11 @@ app.get('/', (request, response) => {
     response.json({test: 'worked'})
 })
 
+app.post('/client-action', (request, response) => {
+    const payload = {type: 'noice'}
+    io.emit('fire-action', payload)
+})
+
 function hub(socket){
     console.log('user connected')
 
