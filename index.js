@@ -42,6 +42,13 @@ function hub(socket){
         console.log('new client logged in')
         socket.emit('response', "you're logged in", "welcome!")
     })
+
+    socket.on('fire-activation', (payload) => {
+        console.log(payload)
+
+        socket.emit('activation-complete')
+    })
+
     socket.on('disconnect', () => console.log('client disconnected'))
 }
 
