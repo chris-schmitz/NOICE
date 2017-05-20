@@ -1,15 +1,18 @@
 const io = require('socket.io-client')
 const {exec} = require('child_process')
+const path = require('path')
 
-console.log('connecting')
+console.log('starting up')
 const socket = io.connect('https://stormy-sierra-95940.herokuapp.com/')
 
-function firePattern (type) {
+function firePattern () {
     // a bit goofey at the moment, but this is a way I can get a poc without
     // having to refactor the pattern prototype.
-    const command = 'node ../../noice-patterns/index.js'
+    const patternPath = path.resolve('./noice-patterns/index.js')
+    const command = `node ${patternPath}`
+
     exec(command, (error, stdout, stderr) => {
-        console.log({error, stdout, stderr})
+        console.log(`pattern fire complete at: ${new Date}`)
     })
 }
 
@@ -21,8 +24,10 @@ socket.on('connect', () => {
     socket.on('response', (...args) => {
         console.log(args)
     })
+
+    socket.on('noice', (...args) => {
+        firePattern()
+    })
 })
 
 socket.on('connect_error', error => console.error(error))
-
-// update and fire

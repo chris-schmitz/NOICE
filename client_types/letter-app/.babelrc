@@ -1,0 +1,17 @@
+{
+  "comments": false,
+  "env": {
+    "main": {
+      "presets": ["es2015", "stage-0"],
+      "sourceMaps": true,
+      "retainLines": true,
+    },
+    "renderer": {
+      "presets": [
+        ["es2015", { "modules": false }],
+        "stage-0"
+      ]
+    }
+  },
+  "plugins": ["transform-runtime"]
+}
