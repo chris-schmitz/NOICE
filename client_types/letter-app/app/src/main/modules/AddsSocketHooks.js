@@ -9,12 +9,13 @@ socket.on('connect', () => console.log(`connected to socket host: ${config.host}
 function addsListeners () {
   ipcMain.on('activate', (event, payload) => {
 
-    console.log(`sending activation type: ${payload.type}`)
-    console.log(`sending activation for word: ${payload.wordId}`)
-    console.log(`sending activation for key: ${payload.activationKey}`)
+    console.log(`activation payload: ${payload}`)
 
-    socket.emit('fire-activation', payload, result => {
-      event.sender.send('activation-complete', result)
+    socket.emit('fire-activation', payload)
+
+    socket.on('activation-complete', response => {
+      console.log('socket server response received')
+      event.sender.send('activation-complete', response)
     })
   })
 }
