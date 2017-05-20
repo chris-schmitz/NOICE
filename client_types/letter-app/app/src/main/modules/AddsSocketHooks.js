@@ -9,7 +9,7 @@ socket.on('connect', () => console.log(`connected to socket host: ${config.host}
 function addsListeners () {
   ipcMain.on('activate', (event, payload) => {
 
-    console.log(`activation payload: ${payload}`)
+    console.log(`activation payload: ${JSON.stringify(payload)}`)
 
     socket.emit('fire-activation', payload)
 

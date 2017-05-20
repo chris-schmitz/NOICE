@@ -45,7 +45,7 @@ function hub(socket){
 
     socket.on('fire-activation', (payload) => {
         console.log('received activation from client')
-        console.log(`activation payload: ${payload}`)
+        console.log(`activation payload: ${JSON.stringify(payload)}`)
 
         socket.emit('activation-complete')
     })
