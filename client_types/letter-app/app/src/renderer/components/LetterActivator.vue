@@ -8,13 +8,13 @@
   import {ipcRenderer} from 'electron'
 
   export default {
-    props: ['wordId', 'activationKey'],
+    props: ['wordId', 'activationKey', 'letter'],
     data () {
       return {}
     },
     methods: {
       activate () {
-        ipcRenderer.send('activate', {type: 'letter-activation', wordId: this.wordId, activationKey: this.activationKey})
+        ipcRenderer.send('activate', {type: 'letter', wordId: this.wordId, activationKey: this.activationKey, letter})
       },
       handleSuccessfulActivation () {
         console.log('activation complete ;)')

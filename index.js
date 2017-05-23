@@ -17,7 +17,7 @@ app.get('/', (request, response) => {
 
 app.post('/noice', (request, response) => {
 
-    const challenge = request.body.challenge
+    const challenge = request.body.challenge // needed for slack integration
     const matchPatterns = /(noice|nice|chris|vscode|node|vue|javascript|raspberry)/i
 
     if (request.body.hasOwnProperty('event') && request.body.event.type === 'message') {
@@ -38,16 +38,24 @@ app.post('/noice', (request, response) => {
 function hub(socket){
     console.log('user connected')
 
-    socket.on('login', (request, ...args) => {
-        console.log('new client logged in')
-        socket.emit('response', "you're logged in", "welcome!")
-    })
+    // socket.on('login', (request, ...args) => {
+    //     console.log('new client logged in')
+    //     socket.emit('response', "you're logged in", "welcome!")
+    // })
 
     socket.on('fire-activation', (payload) => {
         console.log('received activation from client')
         console.log(`activation payload: ${JSON.stringify(payload)}`)
 
-        socket.emit('activation-complete')
+        socket.on('fire-pattern-complete', payload => {
+            console.log('pattern complete')
+            socket.emit('activation-complete')
+        })
+
+        // if (payload.hasOwnProperty('type')) {
+            socket.emit('fire-pattern', payload)
+        // }
+
     })
 
     socket.on('disconnect', () => console.log('client disconnected'))

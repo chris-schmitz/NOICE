@@ -2,7 +2,7 @@
   <div id="app">
     <section class="words">
       <div class="word" v-for="wordData in words">
-        <letter-activator v-for="(letter, position) in wordData.word.split('')" :word-id="wordData.id" :activation-key="position">
+        <letter-activator v-for="(letter, position) in wordData.word.split('')" :word-id="wordData.id" :activation-key="position" :letter="letter">
           <span class='letter'>{{letter}}</span>
         </letter-activator>
       </div>
