@@ -53,7 +53,7 @@ function hub(socket){
         })
 
         // if (payload.hasOwnProperty('type')) {
-            socket.emit('fire-pattern', payload)
+            socket.broadcast.emit('fire-pattern', payload)
         // }
 
     })
