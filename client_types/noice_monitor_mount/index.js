@@ -42,7 +42,7 @@ socket.on('connect', () => {
     // })
 
     socket.on('fire-pattern', payload => {
-        console.log(`received fire-pattern message from server with payload: ${JSON.stringify(paylaod)}`)
+        console.log(`received fire-pattern message from server with payload: ${JSON.stringify(payload)}`)
 
         if (payload.type === 'pattern') {
             NOICE.firePattern(patternName)
