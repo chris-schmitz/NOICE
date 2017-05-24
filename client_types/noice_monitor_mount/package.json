@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "co": "^4.6.0",
-    "onoff": "^1.1.2"
+    "onoff": "^1.1.2",
+    "socket.io-client": "^2.0.1"
   },
   "devDependencies": {},
   "scripts": {
