@@ -14,7 +14,7 @@
     },
     methods: {
       activate () {
-        ipcRenderer.send('activate', {type: 'letter', wordId: this.wordId, activationKey: this.activationKey, letter})
+        ipcRenderer.send('activate', {type: 'letter', wordId: this.wordId, activationKey: this.activationKey, letter: this.letter})
       },
       handleSuccessfulActivation () {
         console.log('activation complete ;)')

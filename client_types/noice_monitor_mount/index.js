@@ -9,23 +9,23 @@ const NOICE = new NoicePatterns()
 console.log(`Trying to connect to socket hub ${config.sockets.hub.domain}`)
 const socket = io.connect(config.sockets.hub.domain)
 
-function firePattern () {
-    return new Promise((resolve, reject) => {
-        NOICE
-            .firePattern(NOICE.patterns.ALLON)
-            .then(() => {
-                NOICE.firePattern(NOICE.patterns.ALLOFF)
-            })
-            .then(() => {
-                NOICE.firePattern(NOICE.patterns.ALLON)
-            })
-            .then(() => {
-                NOICE.firePattern(NOICE.patterns.ALLOFF)
-            })
-            .then(resolve)
-            .catch(reject)
-    })
-}
+// function firePattern () {
+//     return new Promise((resolve, reject) => {
+//         NOICE
+//             .firePattern(NOICE.patterns.ALLON)
+//             .then(() => {
+//                 NOICE.firePattern(NOICE.patterns.ALLOFF)
+//             })
+//             .then(() => {
+//                 NOICE.firePattern(NOICE.patterns.ALLON)
+//             })
+//             .then(() => {
+//                 NOICE.firePattern(NOICE.patterns.ALLOFF)
+//             })
+//             .then(resolve)
+//             .catch(reject)
+//     })
+// }
 
 socket.on('connect', () => {
     console.log('connected')
@@ -36,12 +36,14 @@ socket.on('connect', () => {
         console.log(args)
     })
 
-    socket.on('noice', (...args) => {
-        firePattern()
-            .then(console.log('request complete'))
-    })
+    // socket.on('noice', (...args) => {
+    //     firePattern()
+    //         .then(console.log('request complete'))
+    // })
 
     socket.on('fire-pattern', payload => {
+        console.log(`received fire-pattern message from server with payload: ${JSON.stringify(paylaod)}`)
+
         if (payload.type === 'pattern') {
             NOICE.firePattern(patternName)
                 .then(() => {
