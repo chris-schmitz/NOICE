@@ -7,6 +7,7 @@
     "build:clean": "cross-env PLATFORM_TARGET=clean node tasks/release.js",
     "build:darwin": "cross-env PLATFORM_TARGET=darwin node tasks/release.js",
     "build:linux": "cross-env PLATFORM_TARGET=linux node tasks/release.js",
+    "build:raspbian": "cross-env PLATFORM_TARGET=linux --arch=armv7l node tasks/release.js",
     "build:mas": "cross-env PLATFORM_TARGET=mas node tasks/release.js",
     "build:win32": "cross-env PLATFORM_TARGET=win32 node tasks/release.js",
     "dev": "node tasks/runner.js",

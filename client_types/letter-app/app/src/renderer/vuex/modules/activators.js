@@ -1,7 +1,7 @@
 const state = {
   words: [
-    {id: 1, word: 'NOICE'},
-    {id: 2, word: 'LOL'}
+    {id: 1, word: 'NOICE'}
+    // {id: 2, word: 'LOL'}
   ],
   patterns: [
     {id: 1, label: 'Each letter then flash'}

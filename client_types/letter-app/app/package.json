@@ -7,7 +7,8 @@
     "babel-runtime": "^6.23.0",
     "vue": "^2.1.10",
     "vue-electron": "^1.0.6",
-    "vuex": "^2.1.1"
+    "vuex": "^2.1.1",
+    "socket.io-client": "^2.0.1"
   },
   "devDependencies": {},
   "author": "chris-schmitz <schmitz.chris@gmail.com>"

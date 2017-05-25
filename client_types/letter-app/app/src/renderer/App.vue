@@ -8,8 +8,8 @@
       </div>
     </section>
     <section class="patterns">
-      <button>Each letter then flash</button>
-
+      <i>Pattern buttons will go here</i>
+      <!--<button>Each letter then flash</button>-->
     </section>
   </div>
 </template>
