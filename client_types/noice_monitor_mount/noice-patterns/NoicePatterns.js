@@ -1,15 +1,15 @@
-// const {Gpio} = require('onoff')
-const Gpio = require('../../onoff-mock.js')
+const {Gpio} = require('onoff')
+//const Gpio = require('../../onoff-mock.js')
 const co = require('co')
 
 class NoicePatterns {
 	constructor () {
 		this.leds = {}
-		this.leds.N = new Gpio(14, 'out')
-		this.leds.O = new Gpio(15, 'out')
-		this.leds.I = new Gpio(18, 'out')
-		this.leds.C = new Gpio(23, 'out')
-		this.leds.E = new Gpio(24, 'out')
+		this.leds.N = new Gpio(26, 'out')
+		this.leds.O = new Gpio(19, 'out')
+		this.leds.I = new Gpio(13, 'out')
+		this.leds.C = new Gpio(6, 'out')
+		this.leds.E = new Gpio(5, 'out')
 
 		this.delay = 100
 
@@ -42,8 +42,10 @@ class NoicePatterns {
 	toggleLetter (letter) {
 		return new Promise((resolve, reject) => {
 			const letterPin = this.leds[letter]
+            console.log(`target letter: ${letter}`)
 			console.log(`selected letter: ${letterPin}`)
-			if (letterPin.readSync) {
+            console.log(`current pin state: ${letterPin.readSync()}`)
+			if (letterPin.readSync()) {
 				letterPin.writeSync(this.constants.OFF)
 			} else {
 				letterPin.writeSync(this.constants.ON)
